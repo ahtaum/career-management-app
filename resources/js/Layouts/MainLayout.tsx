@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 import { Head } from '@inertiajs/inertia-react'
+import { MainMenu } from '@/Components/MainMenu';
 
 interface Props {
     title: string;
@@ -13,6 +14,8 @@ export const MainLayout = ({ title, children }: PropsWithChildren<Props>) => {
         <Head title={title} />
 
         <main>
+            <MainMenu />
+
             {children}
         </main>
 
