@@ -30,7 +30,7 @@ export const AdminMenu = () => {
                         </li>
 
                         <li><a href="#">Profile</a></li>
-                        {/* <li><Link href={route("logout")} method="post" as="button" type="button">Logout</Link></li> */}
+                        <li><Link href={route("logout")} method="post" as="button" type="button">Logout</Link></li>
                         <li><a href="#">Logout</a></li>
                     </ul>
                 </div>
@@ -43,7 +43,7 @@ export const AdminMenu = () => {
                     <li><a href={route("dashboard")}>Dashboard</a></li>
                     <li><a href="#">Orders</a></li>
                     <li><a href="#">Costumers</a></li>
-                    {/* <li><Link href={route("logout")} method="post" as="button" type="button">Logout</Link></li> */}
+                    <li><Link href={route("logout")} method="post" as="button" type="button">Logout</Link></li>
                     <li><a href="#">Logout</a></li>
                 </ul>
             </div>

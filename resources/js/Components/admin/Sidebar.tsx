@@ -60,8 +60,7 @@ let Sidebar = () => {
                     </a>
                 </li>
                 <li className="mb-2">
-                    {/* <Link href={route("logout")} method="post" as="button" type="button" className="tflex items-center py-2 px-6 text-white hover:bg-blue-500">Logout</Link> */}
-                    <a href="#" className="tflex items-center py-2 px-6 text-white hover:bg-blue-500">Logout</a>
+                    <Link href={route("logout")} method="post" as="button" type="button" className="tflex items-center py-2 px-6 text-white hover:bg-blue-500">Logout</Link>
                 </li>
             </ul>
 

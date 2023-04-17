@@ -9,6 +9,18 @@ export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
+    function handleSubmit(e: any) {
+        e.preventDefault()
+
+        try {
+            Inertia.post(route("authenticate"), { email, password }, {
+                forceFormData: true,
+            })
+        } catch (error: any) {
+            alert(error.message)
+        }
+    }
+
     return (
         <AuthLayout title="Login">
 
@@ -19,7 +31,7 @@ export default function Login() {
                         <div className="w-full max-w-md p-4">
                             <h1 className="text-white text-3xl font-bold mb-6 lg:text-left md:text-left text-center">Login</h1>
 
-                            <form>
+                            <form onSubmit={handleSubmit}>
                                 <div className="form-control mb-4">
                                     <label className="label">
                                         <span className="label-text">Email</span>
