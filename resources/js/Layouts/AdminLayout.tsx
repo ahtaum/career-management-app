@@ -1,5 +1,7 @@
 import { Head } from "@inertiajs/inertia-react"
 import React, { PropsWithChildren } from "react"
+import Sidebar from "@/Components/admin/Sidebar"
+import { AdminMenu } from "@/Components/admin/AdminMenu"
 
 interface Props {
     title: string;
@@ -11,10 +13,10 @@ export default function AdminLayout({ title, children }: PropsWithChildren<Props
         <>
             <Head title={title} />
 
-            {/* <AdminNavbar /> */}
+            <AdminMenu />
 
             <main className="flex gap-4 h-screen w-screen bg-base-100">
-                {/* <Sidebar /> */}
+                <Sidebar />
 
                 <div className="overflow-y-scroll w-full">
                     {children}
