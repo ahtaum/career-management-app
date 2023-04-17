@@ -26,11 +26,13 @@ class LoginController extends Controller
     public function addUser(RegisterRequest $request) {
         $validatedInput = $request->validated();
 
+        $avatar = $request->file("avatar")->store("public/avatars");
+
         User::create([
             "username" => $validatedInput["username"],
             "email" => $validatedInput["email"],
             "password" => Hash::make($validatedInput["password"]),
-            "avatar" => $validatedInput["avatar"],
+            "avatar" => $avatar,
         ]);
 
         return redirect()->back()->with('message', 'Register successfully');
