@@ -5,9 +5,11 @@ import route from 'ziggy-js'
 import { AuthLayout } from '@/Layouts/AuthLayout'
 
 export default function Login() {
-    const { errors } = usePage().props
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    let { errors } = usePage().props
+    let [email, setEmail] = useState("")
+    let [password, setPassword] = useState("")
+
+    let [loading, setLoading] = useState(false)
 
     function handleSubmit(e: any) {
         e.preventDefault()
@@ -15,8 +17,15 @@ export default function Login() {
         try {
             Inertia.post(route("authenticate"), { email, password }, {
                 forceFormData: true,
+                onProgress: () => {
+                    setLoading(true)
+                },
+                onFinish: () => {
+                    setLoading(false)
+                }
             })
         } catch (error: any) {
+            setLoading(false)
             alert(error.message)
         }
     }
@@ -31,13 +40,22 @@ export default function Login() {
                         <div className="w-full max-w-md p-4">
                             <h1 className="text-white text-3xl font-bold mb-6 lg:text-left md:text-left text-center">Login</h1>
 
+                            { errors.all &&
+                                <div className="alert alert-error shadow-lg my-3">
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                        <span>{ errors.all }</span>
+                                    </div>
+                                </div>
+                            }
+
                             <form onSubmit={handleSubmit}>
                                 <div className="form-control mb-4">
                                     <label className="label">
                                         <span className="label-text">Email</span>
                                     </label>
 
-                                    <input type="email" placeholder="your email" className="input input-bordered" name="email" onChange={(e) => setEmail(e.target.value)} value={email} />
+                                    <input type="email" placeholder="your email" className="input input-bordered" name="email" onChange={(e) => setEmail(e.target.value)} value={email} disabled={loading} />
                                     { errors.email &&
                                         <div className="alert alert-warning shadow-lg mt-3">
                                             <div>
@@ -52,7 +70,7 @@ export default function Login() {
                                         <span className="label-text">Password</span>
                                     </label>
 
-                                    <input type="password" placeholder="your password" className="input input-bordered" name="password" onChange={(e) => setPassword(e.target.value)} value={password} />
+                                    <input type="password" placeholder="your password" className="input input-bordered" name="password" onChange={(e) => setPassword(e.target.value)} value={password} disabled={loading} />
                                     { errors.password &&
                                         <div className="alert alert-warning shadow-lg mt-3">
                                             <div>
@@ -65,7 +83,7 @@ export default function Login() {
                                 <div className="mb-6 flex justify-between">
                                     <Link href={route("home")} className="btn btn-error">Back</Link>
 
-                                    <button className="btn btn-primary" type="submit">Login</button>
+                                    <button className={`btn btn-primary ${loading ? "loading" : ""}`} type="submit">Login</button>
                                 </div>
 
                                 <div className="flex lg:hidden md:hidden">

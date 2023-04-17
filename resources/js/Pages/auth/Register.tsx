@@ -14,6 +14,7 @@ export default function Register() {
     let [confirm_password, setConfirmPassword] = useState("")
 
     let [notif, setNotif] = useState(false)
+    let [loading, setLoading] = useState(false)
 
     let handleSubmit = async (e: any) => {
         e.preventDefault()
@@ -23,6 +24,10 @@ export default function Register() {
                 forceFormData: true,
                 onProgress: () => {
                     setNotif(false)
+                    setLoading(true)
+                },
+                onFinish: () => {
+                    setLoading(false)
                 },
                 onSuccess: () => {
                     setEmail("")
@@ -30,11 +35,13 @@ export default function Register() {
                     setPassword("")
                     setConfirmPassword("")
                     setNotif(true)
+                    setLoading(false)
                 }
             })
         } catch (error: any) {
             alert(error.message)
             setNotif(false)
+            setLoading(false)
         }
     }
 
@@ -82,7 +89,7 @@ export default function Register() {
                                         <span className="label-text">Username</span>
                                     </label>
 
-                                    <input type="text" placeholder="your username" className="input input-bordered" name="username" onChange={(e) => setUsername(e.target.value)} value={username} />
+                                    <input type="text" placeholder="your username" className="input input-bordered" name="username" onChange={(e) => setUsername(e.target.value)} value={username} disabled={loading} />
                                     { errors.username &&
                                         <div className="alert alert-warning shadow-lg mt-3">
                                             <div>
@@ -97,7 +104,7 @@ export default function Register() {
                                         <span className="label-text">Email</span>
                                     </label>
 
-                                    <input type="email" placeholder="your email" className="input input-bordered" name="email" onChange={(e) => setEmail(e.target.value)} value={email} />
+                                    <input type="email" placeholder="your email" className="input input-bordered" name="email" onChange={(e) => setEmail(e.target.value)} value={email} disabled={loading} />
                                     { errors.email &&
                                         <div className="alert alert-warning shadow-lg mt-3">
                                             <div>
@@ -112,7 +119,7 @@ export default function Register() {
                                         <span className="label-text">Password</span>
                                     </label>
 
-                                    <input type="password" placeholder="your password" className="input input-bordered" name="password" onChange={(e) => setPassword(e.target.value)} value={password} />
+                                    <input type="password" placeholder="your password" className="input input-bordered" name="password" onChange={(e) => setPassword(e.target.value)} value={password} disabled={loading} />
                                     { errors.password &&
                                         <div className="alert alert-warning shadow-lg mt-3">
                                             <div>
@@ -127,7 +134,7 @@ export default function Register() {
                                         <span className="label-text">Confirm Password</span>
                                     </label>
 
-                                    <input type="password" placeholder="confirm your password" className="input input-bordered" name="confirm_password" onChange={(e) => setConfirmPassword(e.target.value)} value={confirm_password} />
+                                    <input type="password" placeholder="confirm your password" className="input input-bordered" name="confirm_password" onChange={(e) => setConfirmPassword(e.target.value)} value={confirm_password} disabled={loading} />
                                     { errors.confirm_password &&
                                         <div className="alert alert-warning shadow-lg mt-3">
                                             <div>
@@ -143,7 +150,7 @@ export default function Register() {
                                     </label>
 
                                     {/* <input type="file" className="file-input file-input-bordered" name="avatar" onChange={(e) => setAvatar(e.target.files[0])} value={undefined} /> */}
-                                    <input type="file" className="file-input file-input-bordered" name="avatar" onChange={(e) => setAvatar(e.target.files ? e.target.files[0] : null)} value={undefined} />
+                                    <input type="file" className="file-input file-input-bordered" name="avatar" onChange={(e) => setAvatar(e.target.files ? e.target.files[0] : null)} value={undefined} disabled={loading} />
                                     { errors.avatar &&
                                         <div className="alert alert-warning shadow-lg mt-3">
                                             <div>
@@ -155,7 +162,7 @@ export default function Register() {
 
                                 <div className="mb-6 flex justify-between">
                                     <Link href={route("home")} className="btn btn-error">Back</Link>
-                                    <button className="btn btn-primary" type="submit">Register</button>
+                                    <button className={`btn btn-primary ${loading ? "loading" : ""}`} type="submit">Register</button>
                                 </div>
 
                                 <div className="flex lg:hidden md:hidden">
