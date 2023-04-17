@@ -11,4 +11,8 @@ class AdminMainController extends Controller
     public function dashboard() {
         return Inertia::render("admin/Dashboard");
     }
+
+    public function profile() {
+        return Inertia::render("admin/Profile");
+    }
 }

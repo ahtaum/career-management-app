@@ -3,7 +3,7 @@ import { usePage } from '@inertiajs/inertia-react'
 import AdminLayout from '@/Layouts/AdminLayout'
 
 export default function Dashboard() {
-    const { userAuth }: any = usePage().props
+    let { userAuth }: any = usePage().props
 
     return (
         <AdminLayout title="Dashboard">

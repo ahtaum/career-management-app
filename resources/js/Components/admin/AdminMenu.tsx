@@ -29,7 +29,7 @@ export const AdminMenu = () => {
                             </ul>
                         </li>
 
-                        <li><a href="#">Profile</a></li>
+                        <li><Link href={route("profile")}>Profile</Link></li>
                         <li><Link href={route("logout")} method="post" as="button" type="button">Logout</Link></li>
                         <li><a href="#">Logout</a></li>
                     </ul>
