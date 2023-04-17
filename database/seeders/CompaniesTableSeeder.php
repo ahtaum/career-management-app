@@ -19,6 +19,7 @@ class CompaniesTableSeeder extends Seeder
         $name = "PT Default Indonesia";
 
         DB::table('companies')->insert([
+            'id' => Str::uuid()->toString(),
             'name' => $name,
             'address' => 'Cirebon - Jawa Barat',
             'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero aliquid deleniti odio, officiis eveniet, voluptates ex ad veniam fugit architecto dignissimos commodi quisquam. Expedita adipisci commodi voluptatem reprehenderit possimus voluptates!',
