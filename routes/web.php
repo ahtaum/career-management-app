@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\Admin\AdminMainController;
 
 // Main
@@ -31,6 +32,10 @@ Route::prefix("admin")->middleware('auth')->group(function() {
     Route::controller(AdminMainController::class)->group(function() {
         Route::get("/dashboard", "dashboard")->name("dashboard");
         Route::get("/profile", "profile")->name("profile");
+    });
+
+    Route::controller(JobController::class)->group(function() {
+        Route::get("/jobs", "jobs")->name("jobs");
     });
 
 });

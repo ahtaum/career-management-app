@@ -13,8 +13,7 @@ let Sidebar = () => {
     return (
         <div className="lg:flex md:flex hidden flex-col w-64 bg-gradient-to-b from-blue-400 to-blue-600 h-screen">
             <div className="h-16 flex justify-center items-center text-white text-xl font-bold mb-6">
-                {/* { userAuth.data.username } */}
-                Admin
+                { userAuth.data.username }
             </div>
 
             <ul className="flex-grow">
@@ -37,9 +36,9 @@ let Sidebar = () => {
                     {isOpen && (
                         <ul className="ml-4 mt-2">
                             <li>
-                                <a href="#" className="flex items-center py-2 px-6 text-white hover:bg-blue-500">
+                                <Link href={route("jobs")} className="flex items-center py-2 px-6 text-white hover:bg-blue-500">
                                 Jobs
-                                </a>
+                                </Link>
                             </li>
                             <li>
                                 <a href="#" className="flex items-center py-2 px-6 text-white hover:bg-blue-500">
