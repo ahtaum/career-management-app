@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Application extends Model
 {
@@ -15,5 +16,15 @@ class Application extends Model
 
     public function applications() {
         return $this->belongsTo('App\Models\Candidate', 'candidate_id');
+    }
+
+    // generate UUID auto
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->id = Str::uuid();
+        });
     }
 }

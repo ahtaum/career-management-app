@@ -4,7 +4,7 @@ import route from "ziggy-js"
 
 export const MainMenu = () => {
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-base-100 container">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -13,7 +13,6 @@ export const MainMenu = () => {
 
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li><Link href={route('home')}>Home</Link></li>
-                        <li><a href="#">About</a></li>
                         <li tabIndex={0}>
                             <a className="justify-between">
                                 Admin
@@ -21,7 +20,7 @@ export const MainMenu = () => {
                             </a>
                             <ul className="p-2 bg-base-100">
                                 <li><a href="#">Login</a></li>
-                                <li><a href="#">Register</a></li>
+                                <li><Link href={route("register")}>Register</Link></li>
                             </ul>
                         </li>
                     </ul>
@@ -33,7 +32,6 @@ export const MainMenu = () => {
             <div className="navbar-end hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     <li><Link href={route('home')}>Home</Link></li>
-                    <li><a href="#">About</a></li>
                     <li tabIndex={0}>
                         <a>
                         Admin
@@ -41,7 +39,7 @@ export const MainMenu = () => {
                         </a>
                         <ul className="p-2 bg-base-100">
                             <li><a href="#">Login</a></li>
-                            <li><a href="#">Register</a></li>
+                            <li><Link href={route("register")}>Register</Link></li>
                         </ul>
                     </li>
                 </ul>
