@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name', 255);
             $table->string('address', 255);
+            $table->string('info', 255);
             $table->text('description')->nullable();
             $table->string('logo')->nullable();
             $table->timestamps();
