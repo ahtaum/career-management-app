@@ -57,7 +57,7 @@ export default function Register() {
 
                             <p className="text-gray-700 mb-4">
                                 have some an account?{' '}
-                                <a href="#" className="text-blue-600 hover:text-blue-700 underline">Login Now</a>
+                                <Link href={route("login")} className="text-blue-600 hover:text-blue-700 underline">Login Now</Link>
                             </p>
                         </div>
                     </div>
@@ -71,7 +71,7 @@ export default function Register() {
                                 <div className="alert alert-success shadow-lg">
                                     <div>
                                         <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                        <span>Register Complete go to <a href="#" className="text-blue-700 font-bold underline">Login</a></span>
+                                        <span>Register Complete go to <Link href={route("login")} className="text-blue-700 font-bold underline">Login</Link></span>
                                     </div>
                                 </div>
                             ) }
@@ -155,15 +155,15 @@ export default function Register() {
 
                                 <div className="mb-6 flex justify-between">
                                     <Link href={route("home")} className="btn btn-error">Back</Link>
-                                    <button className="btn btn-primary" type="submit">Login</button>
+                                    <button className="btn btn-primary" type="submit">Register</button>
                                 </div>
 
                                 <div className="flex lg:hidden md:hidden">
                                     <p className="text-gray-700 mb-4">
                                         have some an account?{' '}
-                                        <a href="#" className="text-blue-700 font-bold underline">
+                                        <Link href={route("login")} className="text-blue-700 font-bold underline">
                                             Login
-                                        </a>
+                                        </Link>
                                     </p>
                                 </div>
                             </form>

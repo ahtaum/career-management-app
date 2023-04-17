@@ -17,6 +17,10 @@ class LoginController extends Controller
         return Inertia::render("auth/Register");
     }
 
+    public function login() {
+        return Inertia::render("auth/Login");
+    }
+
     // Process
     public function addUser(RegisterRequest $request) {
         $validatedInput = $request->validated();
