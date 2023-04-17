@@ -24,7 +24,7 @@ export const AdminMenu = () => {
 
                             <ul className="p-2 bg-base-100">
                                 <li><Link href={route("jobs")}>Jobs</Link></li>
-                                <li><a href="#">Candidates</a></li>
+                                <li><Link href={route("candidates")}>Candidates</Link></li>
                                 <li><a href="#">Applications</a></li>
                             </ul>
                         </li>
