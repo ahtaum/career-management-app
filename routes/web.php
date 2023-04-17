@@ -4,9 +4,10 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Admin\AdminMainController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\CandidateController;
-use App\Http\Controllers\Admin\AdminMainController;
+use App\Http\Controllers\ApplicationController;
 
 // Main
 Route::controller(MainController::class)->group(function () {
@@ -41,6 +42,10 @@ Route::prefix("admin")->middleware('auth')->group(function() {
 
     Route::controller(CandidateController::class)->group(function() {
         Route::get("/candidates", "candidates")->name("candidates");
+    });
+
+    Route::controller(ApplicationController::class)->group(function() {
+        Route::get("/applications", "applications")->name("applications");
     });
 
 });
