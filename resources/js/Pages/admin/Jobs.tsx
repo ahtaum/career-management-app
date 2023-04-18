@@ -2,10 +2,14 @@ import React, { useState } from 'react'
 import { Link } from '@inertiajs/inertia-react'
 import route from 'ziggy-js'
 import AdminLayout from '@/Layouts/AdminLayout'
-import { convertDate } from '@/Helpers/Tools'
+import { convertDate, sanitizeHtml } from '@/Helpers/Tools'
 
 export default function Jobs({ jobs }: any) {
     let [search, setSearch] = useState("")
+
+    let [id, setId] = useState("")
+    let [title, setTitle] = useState("")
+    let [description, setDescription] = useState("")
 
     // Search Data
     let searchPosts = () => {
@@ -23,6 +27,21 @@ export default function Jobs({ jobs }: any) {
     return (
         <AdminLayout title="Jobs">
 
+            {/* Details Modal */}
+            <input type="checkbox" id="details-job" className="modal-toggle" />
+            <div className="modal p-3">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg text-center mb-8">{ title }</h3>
+
+                    { sanitizeHtml(description) }
+
+                    <div className="modal-action">
+                        <label htmlFor="details-job" className="btn btn-error">Close</label>
+                    </div>
+                </div>
+            </div>
+
+            {/* Main */}
             <section id="jobs-page" className="container my-8 p-3">
 
                 <h1 className="font-bold text-2xl mb-8">Jobs</h1>
@@ -58,7 +77,11 @@ export default function Jobs({ jobs }: any) {
                                         <td>{ job.level }</td>
                                         <td>{ convertDate(job.updated_at) }</td>
                                         <td className="flex gap-2">
-                                            <div className="badge badge-info p-3">Details</div>
+                                            <label htmlFor="details-job" className="badge badge-info p-3 cursor-pointer" onClick={() => {
+                                                setId(job.id)
+                                                setTitle(job.title)
+                                                setDescription(job.description)
+                                            }}>Details</label>
                                             <div className="badge badge-success p-3 cursor-pointer">Edit</div>
                                             <div className="badge badge-error p-3 cursor-pointer">Delete</div>
                                         </td>
