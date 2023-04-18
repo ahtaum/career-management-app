@@ -34,6 +34,9 @@ Route::prefix("admin")->middleware('auth')->group(function() {
     Route::controller(AdminMainController::class)->group(function() {
         Route::get("/dashboard", "dashboard")->name("dashboard");
         Route::get("/profile", "profile")->name("profile");
+
+        Route::post("/profile/changeProfile/{id}", "changeProfile")->name("changeProfile");
+        Route::post("/profile/changePassword/{id}", "changePassword")->name("changePassword");
     });
 
     Route::controller(JobController::class)->group(function() {
@@ -55,3 +58,4 @@ Route::prefix("admin")->middleware('auth')->group(function() {
     });
 
 });
+
