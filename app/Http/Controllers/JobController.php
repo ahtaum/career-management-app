@@ -22,6 +22,12 @@ class JobController extends Controller
         return Inertia::render("admin/AddJob");
     }
 
+    public function editJob($id) {
+        return Inertia::render("admin/EditJob", [
+            "job" => Job::findOrFail($id)
+        ]);
+    }
+
     // Process
     public function store(CreateJobRequest $request) {
         $jobsDataValidated = $request->validated();
@@ -35,5 +41,19 @@ class JobController extends Controller
         ]);
 
         return redirect()->back()->with('message', 'Post Job successfully');
+    }
+
+    public function update($id, CreateJobRequest $request) {
+        $jobsDataValidated = $request->validated();
+
+        $job = Job::findOrFail($id);
+        $job->title = $jobsDataValidated["title"];
+        $job->salary = $jobsDataValidated["salary"];
+        $job->info = $jobsDataValidated["info"];
+        $job->description = $jobsDataValidated["description"];
+        $job->level = $jobsDataValidated["level"];
+        $job->save();
+
+        return redirect()->back()->with('message', 'Edit Post Job successfully');
     }
 }

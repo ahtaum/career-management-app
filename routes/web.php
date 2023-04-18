@@ -39,8 +39,10 @@ Route::prefix("admin")->middleware('auth')->group(function() {
     Route::controller(JobController::class)->group(function() {
         Route::get("/jobs", "jobs")->name("jobs");
         Route::get("/jobs/addJob", "addJob")->name("addJob");
+        Route::get("/jobs/editJob/{id}", "editJob")->name("editJob");
 
         Route::post("/jobs/store", "store")->name("store");
+        Route::post("/jobs/update/{id}", "update")->name("update");
     });
 
     Route::controller(CandidateController::class)->group(function() {

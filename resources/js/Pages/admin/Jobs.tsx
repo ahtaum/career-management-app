@@ -46,7 +46,7 @@ export default function Jobs({ jobs }: any) {
 
                 <h1 className="font-bold text-2xl mb-8">Jobs</h1>
 
-                <div className="flex justify-between mr-2 my-5">
+                <div className="flex justify-between mr-2 my-8">
                     <Link href={route("addJob")} className="btn btn-primary">Add</Link>
 
                     <input type="text" placeholder="Type here" className="input input-bordered" onChange={(e) => setSearch(e.target.value)} value={search} />
@@ -82,7 +82,7 @@ export default function Jobs({ jobs }: any) {
                                                 setTitle(job.title)
                                                 setDescription(job.description)
                                             }}>Details</label>
-                                            <div className="badge badge-success p-3 cursor-pointer">Edit</div>
+                                            <Link href={route("editJob", job.id)} className="badge badge-success p-3 cursor-pointer">Edit</Link>
                                             <div className="badge badge-error p-3 cursor-pointer">Delete</div>
                                         </td>
                                     </tr>

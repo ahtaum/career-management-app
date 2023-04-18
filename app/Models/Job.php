@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 
 class Job extends Model
 {
+    public $incrementing = false;
+    protected $keyType = 'string';
     protected $table = 'jobs';
     protected $guarded = ['id'];
 
