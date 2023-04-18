@@ -32,7 +32,7 @@ class LoginController extends Controller
             "username" => $validatedInput["username"],
             "email" => $validatedInput["email"],
             "password" => Hash::make($validatedInput["password"]),
-            "avatar" => $avatar,
+            "avatar" => ($avatar != '') ? $avatar : "default.png",
         ]);
 
         return redirect()->back()->with('message', 'Register successfully');
