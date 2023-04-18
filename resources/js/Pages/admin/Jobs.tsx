@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { Link } from '@inertiajs/inertia-react'
+import { Link, usePage } from '@inertiajs/inertia-react'
+import { Inertia } from '@inertiajs/inertia'
 import route from 'ziggy-js'
 import AdminLayout from '@/Layouts/AdminLayout'
 import { convertDate, sanitizeHtml } from '@/Helpers/Tools'
 
 export default function Jobs({ jobs }: any) {
+    let { flash }: any = usePage().props
     let [search, setSearch] = useState("")
 
     let [id, setId] = useState("")
@@ -24,6 +26,15 @@ export default function Jobs({ jobs }: any) {
         })
     }
 
+    // Delete Data
+    let deleteItem = (itemId: string) => {
+        try {
+            Inertia.delete(route("delete", itemId))
+        } catch (error: any) {
+            console.log(error.message)
+        }
+    }
+
     return (
         <AdminLayout title="Jobs">
 
@@ -40,6 +51,30 @@ export default function Jobs({ jobs }: any) {
                     </div>
                 </div>
             </div>
+
+            {/* Delete Modal */}
+            <input type="checkbox" id="delete-modal" className="modal-toggle" />
+            <div className="modal">
+                <div className="modal-box">
+                    <h3 className="font-bold text-xl text-center mb-10">Are You Sure to delete this Post?!</h3>
+
+                    <div className="modal-action flex justify-between">
+                        <label htmlFor="delete-modal" className="btn btn-success">Close</label>
+
+                        <label htmlFor="delete-modal" className="btn btn-error" onClick={() => deleteItem(id)}>Delete</label>
+                    </div>
+                </div>
+            </div>
+
+            {/* Delete Item Alert */}
+            { flash.message && (
+                <div className="alert alert-success shadow-lg my-8">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span>{ flash.message }</span>
+                    </div>
+                </div>
+            ) }
 
             {/* Main */}
             <section id="jobs-page" className="container my-8 p-3">
@@ -78,12 +113,11 @@ export default function Jobs({ jobs }: any) {
                                         <td>{ convertDate(job.updated_at) }</td>
                                         <td className="flex gap-2">
                                             <label htmlFor="details-job" className="badge badge-info p-3 cursor-pointer" onClick={() => {
-                                                setId(job.id)
                                                 setTitle(job.title)
                                                 setDescription(job.description)
                                             }}>Details</label>
                                             <Link href={route("editJob", job.id)} className="badge badge-success p-3 cursor-pointer">Edit</Link>
-                                            <div className="badge badge-error p-3 cursor-pointer">Delete</div>
+                                            <label htmlFor="delete-modal" className="badge badge-error p-3 cursor-pointer" onClick={ () => setId(job.id) }>Delete</label>
                                         </td>
                                     </tr>
                                 )) }

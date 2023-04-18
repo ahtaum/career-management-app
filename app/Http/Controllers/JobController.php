@@ -56,4 +56,10 @@ class JobController extends Controller
 
         return redirect()->back()->with('message', 'Edit Post Job successfully');
     }
+
+    public function delete($id) {
+        Job::findOrFail($id)->delete();
+
+        return redirect()->back()->with('message', 'Post Job Deleted');
+    }
 }

@@ -43,6 +43,7 @@ Route::prefix("admin")->middleware('auth')->group(function() {
 
         Route::post("/jobs/store", "store")->name("store");
         Route::post("/jobs/update/{id}", "update")->name("update");
+        Route::delete("/jobs/delete/{id}", "delete")->name("delete");
     });
 
     Route::controller(CandidateController::class)->group(function() {
