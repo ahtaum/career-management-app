@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { Link } from '@inertiajs/inertia-react'
+import route from 'ziggy-js'
 import AdminLayout from '@/Layouts/AdminLayout'
 import { convertDate } from '@/Helpers/Tools'
 
@@ -7,7 +9,7 @@ export default function Jobs({ jobs }: any) {
 
     // Search Data
     let searchPosts = () => {
-        let paramSearch = ["name"]
+        let paramSearch = ["title"]
 
         return jobs.filter((post: any) => {
             return paramSearch.some((newData) => {
@@ -26,7 +28,7 @@ export default function Jobs({ jobs }: any) {
                 <h1 className="font-bold text-2xl mb-8">Jobs</h1>
 
                 <div className="flex justify-between mr-2 my-5">
-                    <button className="btn btn-primary">Add</button>
+                    <Link href={route("addJob")} className="btn btn-primary">Add</Link>
 
                     <input type="text" placeholder="Type here" className="input input-bordered" onChange={(e) => setSearch(e.target.value)} value={search} />
                 </div>
