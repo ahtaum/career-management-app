@@ -149,7 +149,6 @@ export default function Register() {
                                         <span className="label-text">Avatar (Options)</span>
                                     </label>
 
-                                    {/* <input type="file" className="file-input file-input-bordered" name="avatar" onChange={(e) => setAvatar(e.target.files[0])} value={undefined} /> */}
                                     <input type="file" className="file-input file-input-bordered" name="avatar" onChange={(e) => setAvatar(e.target.files ? e.target.files[0] : null)} value={undefined} disabled={loading} />
                                     { errors.avatar &&
                                         <div className="alert alert-warning shadow-lg mt-3">
