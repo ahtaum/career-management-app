@@ -2,7 +2,12 @@ import React from 'react'
 import { usePage } from '@inertiajs/inertia-react'
 import AdminLayout from '@/Layouts/AdminLayout'
 
-export default function Dashboard() {
+interface DashboardProps {
+    total_jobs: number,
+    total_candidates: number,
+}
+
+export default function Dashboard({ total_jobs, total_candidates }: DashboardProps) {
     let { userAuth }: any = usePage().props
 
     return (
@@ -19,11 +24,11 @@ export default function Dashboard() {
 
                             <div className="avatar mb-4 mx-auto">
                                 <div className="w-24 rounded-full">
-                                    <img src={userAuth.data.avatar} />
+                                    <img src={ userAuth.profileImg } />
                                 </div>
                             </div>
 
-                            <p className="mb-4 text-lg">{ userAuth.data.email }</p>
+                            <p className="mb-4 text-lg text-center">{ userAuth.data.email }</p>
 
                             <div className="card-actions justify-center">
                                 <button className="btn btn-primary">Profile</button>
@@ -33,13 +38,13 @@ export default function Dashboard() {
                     <div className="card bg-base-100 shadow-xl mb-4 lg:w-96 md:w-96">
                         <div className="card-body">
                             <h2 className="card-title mx-auto">Jobs</h2>
-                            <h1 className="text-7xl font-bold lg:mt-8 text-center">0</h1>
+                            <h1 className="text-7xl font-bold lg:mt-8 text-center">{ total_jobs }</h1>
                         </div>
                     </div>
                     <div className="card bg-base-100 shadow-xl mb-4 lg:w-96 md:w-96">
                         <div className="card-body">
                             <h2 className="card-title mx-auto">Candidates</h2>
-                            <h1 className="text-7xl font-bold lg:mt-8 text-center">0</h1>
+                            <h1 className="text-7xl font-bold lg:mt-8 text-center">{ total_candidates }</h1>
                         </div>
                     </div>
                 </div>

@@ -89,7 +89,7 @@ export default function Profile() {
 
                         <div className="avatar mb-4 mx-auto my-2">
                             <div className="w-24 rounded-full">
-                                <img src={userAuth.data.avatar}/>
+                                <img src={ userAuth.profileImg } />
                             </div>
                         </div>
 
