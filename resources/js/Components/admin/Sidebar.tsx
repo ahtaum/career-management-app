@@ -45,11 +45,6 @@ let Sidebar = () => {
                                 Candidates
                                 </Link>
                             </li>
-                            <li>
-                                <Link href={route("applications")} className="flex items-center py-2 px-6 text-white hover:bg-blue-500">
-                                Applications
-                                </Link>
-                            </li>
                         </ul>
                     )}
                 </li>

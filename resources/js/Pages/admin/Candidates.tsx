@@ -7,10 +7,24 @@ import { convertDate } from '@/Helpers/Tools'
 import DownloadFiles from '@/Components/admin/DownloadFiles'
 
 export default function Candidates({ candidates }: any) {
+    let { flash }: any = usePage().props
+
     let [search, setSearch] = useState("")
 
     let [about, setAbout] = useState("")
     let [linkedin, setLinkedin] = useState("")
+    let [status, setStatus] = useState("")
+    let [id, setId] = useState("")
+
+    let handleChange = async (e: any) => {
+        e.preventDefault()
+
+        try {
+            Inertia.post(route("changeStatus", id), { status })
+        } catch (error: any) {
+            alert(error.message)
+        }
+    }
 
     // Search Data
     let searchPosts = () => {
@@ -25,8 +39,41 @@ export default function Candidates({ candidates }: any) {
         })
     }
 
+    // Delete Data
+    let deleteItem = (itemId: string) => {
+        try {
+            Inertia.delete(route("delete", itemId))
+        } catch (error: any) {
+            console.log(error.message)
+        }
+    }
+
     return (
         <AdminLayout title="Candidates">
+
+            {/* Notification for status change */}
+            { flash.message && (
+                <div className="alert alert-success shadow-lg my-4">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span>{ flash.message }</span>
+                    </div>
+                </div>
+            ) }
+
+            {/* Delete Modal */}
+            <input type="checkbox" id="delete-candidate" className="modal-toggle" />
+            <div className="modal">
+                <div className="modal-box">
+                    <h3 className="font-bold text-xl text-center mb-10">Are You Sure to delete this Post?!</h3>
+
+                    <div className="modal-action flex justify-between">
+                        <label htmlFor="delete-candidate" className="btn btn-success">Close</label>
+
+                        <label htmlFor="delete-candidate" className="btn btn-error" onClick={() => deleteItem(id)}>Delete</label>
+                    </div>
+                </div>
+            </div>
 
             {/* Details Modal */}
             <input type="checkbox" id="details-candidate" className="modal-toggle" />
@@ -35,13 +82,45 @@ export default function Candidates({ candidates }: any) {
                     { linkedin && <p className="mb-4">Linkedin : { linkedin }</p>}
 
                     <div>
-                        <h3 className="text-lg font-bold mb-2">About :</h3>
+                        <h3 className="text-lg font-bold mb-4 text-center">About</h3>
                         <p>{ about }</p>
                     </div>
 
                     <div className="modal-action">
                         <label htmlFor="details-candidate" className="btn btn-error">Close</label>
                     </div>
+                </div>
+            </div>
+
+            {/* Edit Status Job Modal */}
+            <input type="checkbox" id="edit-status" className="modal-toggle" />
+            <div className="modal p-3">
+                <div className="modal-box">
+                    <h1 className="mb-4 font-bold text-xl text-center">Change Status Candidate</h1>
+
+                    <form onSubmit={handleChange}>
+                        <div className="form-control mb-4">
+                            <label className="label">
+                                <span className="label-text">Status</span>
+                            </label>
+
+                            <select className="select select-bordered" name="level" onChange={(e) => setStatus(e.target.value)} value={status}>
+                                <option disabled value="">Select Level</option>
+                                <option value="pending">Pending</option>
+                                <option value="accepted" selected={status === "accepted"}>Accepted</option>
+                                <option value="fail">Fail</option>
+                            </select>
+                        </div>
+
+                        <div className="modal-action">
+                            <label htmlFor="edit-status" className="btn btn-error">Close</label>
+
+                            <label htmlFor="edit-status">
+                                <button className="btn btn-primary" type="submit">Change</button>
+                            </label>
+                        </div>
+                    </form>
+
                 </div>
             </div>
 
@@ -59,7 +138,9 @@ export default function Candidates({ candidates }: any) {
                                 <tr>
                                     <th></th>
                                     <th>Name</th>
+                                    <th>Applied</th>
                                     <th>Cv</th>
+                                    <th>Status</th>
                                     <th>Gender</th>
                                     <th>Address</th>
                                     <th>Updated At</th>
@@ -71,9 +152,11 @@ export default function Candidates({ candidates }: any) {
                                     <tr key={index}>
                                         <th>{ index + 1 }</th>
                                         <td>{ candidate.name }</td>
+                                        <td>{ candidate.jobs.title }</td>
                                         <td>
                                             <DownloadFiles filename={ candidate.cv } />
                                         </td>
+                                        <td>{ candidate.applications.status }</td>
                                         <td>{ candidate.gender }</td>
                                         <td>{ candidate.address }</td>
                                         <td>{ convertDate(candidate.updated_at) }</td>
@@ -84,6 +167,11 @@ export default function Candidates({ candidates }: any) {
                                                     setLinkedin(candidate.linkedin)
                                                 } }>Details</label>
                                             }
+                                            <label htmlFor="edit-status" className="badge badge-success p-3 cursor-pointer" onClick={ () => {
+                                                setStatus(candidate.applications.status)
+                                                setId(candidate.applications.id)
+                                            } }>Edit</label>
+                                            <label htmlFor="delete-candidate" className="badge badge-error p-3 cursor-pointer" onClick={() => setId(candidate.id)}>Delete</label>
                                         </td>
                                     </tr>
                                 )) }

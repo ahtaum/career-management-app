@@ -25,7 +25,6 @@ export const AdminMenu = () => {
                             <ul className="p-2 bg-base-100">
                                 <li><Link href={route("jobs")}>Jobs</Link></li>
                                 <li><Link href={route("candidates")}>Candidates</Link></li>
-                                <li><Link href={route("applications")}>Applications</Link></li>
                             </ul>
                         </li>
 
