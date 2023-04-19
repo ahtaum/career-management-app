@@ -3,13 +3,14 @@ import { Link, usePage } from '@inertiajs/inertia-react'
 import { Inertia } from '@inertiajs/inertia'
 import route from 'ziggy-js'
 import AdminLayout from '@/Layouts/AdminLayout'
-import { convertDate, sanitizeHtml } from '@/Helpers/Tools'
+import { convertDate } from '@/Helpers/Tools'
+import DownloadFiles from '@/Components/admin/DownloadFiles'
 
 export default function Candidates({ candidates }: any) {
-    let { flash }: any = usePage().props
     let [search, setSearch] = useState("")
 
-    let [id, setId] = useState("")
+    let [about, setAbout] = useState("")
+    let [linkedin, setLinkedin] = useState("")
 
     // Search Data
     let searchPosts = () => {
@@ -27,15 +28,22 @@ export default function Candidates({ candidates }: any) {
     return (
         <AdminLayout title="Candidates">
 
-            {/* Delete Item Alert */}
-            { flash.message && (
-                <div className="alert alert-success shadow-lg my-8">
+            {/* Details Modal */}
+            <input type="checkbox" id="details-candidate" className="modal-toggle" />
+            <div className="modal p-3">
+                <div className="modal-box">
+                    { linkedin && <p className="mb-4">Linkedin : { linkedin }</p>}
+
                     <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        <span>{ flash.message }</span>
+                        <h3 className="text-lg font-bold mb-2">About :</h3>
+                        <p>{ about }</p>
+                    </div>
+
+                    <div className="modal-action">
+                        <label htmlFor="details-candidate" className="btn btn-error">Close</label>
                     </div>
                 </div>
-            ) }
+            </div>
 
             <section id="candidates-page" className="container my-8 p-3">
 
@@ -59,21 +67,26 @@ export default function Candidates({ candidates }: any) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <td>Cy Ganderton</td>
-                                    <td>
-                                        <div className="badge badge-primary p-3">Download</div>
-                                    </td>
-                                    <td>Littel, Schaden and Vandervort</td>
-                                    <td>Canada</td>
-                                    <td>12/16/2020</td>
-                                    <td className="flex gap-2">
-                                        <div className="badge badge-info p-3">Details</div>
-                                        <div className="badge badge-success p-3 cursor-pointer">Edit</div>
-                                        <div className="badge badge-error p-3 cursor-pointer">Delete</div>
-                                    </td>
-                                </tr>
+                                { candidates && searchPosts().map((candidate: any, index: number) => (
+                                    <tr key={index}>
+                                        <th>{ index + 1 }</th>
+                                        <td>{ candidate.name }</td>
+                                        <td>
+                                            <DownloadFiles filename={ candidate.cv } />
+                                        </td>
+                                        <td>{ candidate.gender }</td>
+                                        <td>{ candidate.address }</td>
+                                        <td>{ convertDate(candidate.updated_at) }</td>
+                                        <td className="flex gap-2">
+                                            { candidate.about &&
+                                                <label htmlFor="details-candidate" className="badge badge-info p-3 cursor-pointer" onClick={ () => {
+                                                    setAbout(candidate.about)
+                                                    setLinkedin(candidate.linkedin)
+                                                } }>Details</label>
+                                            }
+                                        </td>
+                                    </tr>
+                                )) }
                             </tbody>
                         </table>
                     </div>

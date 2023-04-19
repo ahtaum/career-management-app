@@ -54,6 +54,7 @@ Route::prefix("admin")->middleware('auth')->group(function() {
 
     Route::controller(CandidateController::class)->group(function() {
         Route::get("/candidates", "candidates")->name("candidates");
+        Route::get("/candidates/download/file/{fileName}", "downloadFile")->name("downloadFile");
     });
 
     Route::controller(ApplicationController::class)->group(function() {
