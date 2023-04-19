@@ -1,5 +1,6 @@
 import React from 'react'
-import { usePage } from '@inertiajs/inertia-react'
+import { usePage, Link } from '@inertiajs/inertia-react'
+import route from 'ziggy-js'
 import AdminLayout from '@/Layouts/AdminLayout'
 
 interface DashboardProps {
@@ -31,7 +32,7 @@ export default function Dashboard({ total_jobs, total_candidates }: DashboardPro
                             <p className="mb-4 text-lg text-center">{ userAuth.data.email }</p>
 
                             <div className="card-actions justify-center">
-                                <button className="btn btn-primary">Profile</button>
+                                <Link href={route("profile")} className="btn btn-primary">Profile</Link>
                             </div>
                         </div>
                     </div>

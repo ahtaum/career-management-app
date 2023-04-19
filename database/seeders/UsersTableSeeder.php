@@ -22,7 +22,9 @@ class UsersTableSeeder extends Seeder
             'username' => Str::random(10),
             'email' => 'admin@admin.dev',
             'password' => Hash::make('123456789'),
-            'avatar' => 'default.png'
+            'avatar' => 'default.png',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }

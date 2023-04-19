@@ -12,6 +12,9 @@ use App\Http\Controllers\ApplicationController;
 // Main
 Route::controller(MainController::class)->group(function () {
     Route::get("/", "home")->name("home");
+    Route::get("/details/job/{id}", "detailsJob")->name("detailsJob");
+
+    Route::post("/apply/job", "applyJob")->name("applyJob");
 });
 
 // Auth

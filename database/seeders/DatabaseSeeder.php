@@ -21,5 +21,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CompaniesTableSeeder::class,
         ]);
+
+        $this->call([
+            JobSeeder::class,
+        ]);
     }
 }

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
             $table->string('email', 255)->unique();
             $table->string('name', 255);
-            $table->string('password', 255);
             $table->string('cv');
             $table->enum('gender', ['male', 'female']);
             $table->string('address', 255);

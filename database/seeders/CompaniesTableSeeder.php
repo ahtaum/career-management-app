@@ -24,6 +24,8 @@ class CompaniesTableSeeder extends Seeder
             'address' => 'Cirebon - Jawa Barat',
             'info' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.',
             'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero aliquid deleniti odio, officiis eveniet, voluptates ex ad veniam fugit architecto dignissimos commodi quisquam. Expedita adipisci commodi voluptatem reprehenderit possimus voluptates!',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }
