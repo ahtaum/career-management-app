@@ -18,19 +18,21 @@ interface Job {
     job: any;
 }
 
+type Gender = "male" | "female"
+
 export default function Job({ job }: Job) {
     let { errors, flash }: any = usePage().props
     let job_id = job.id
 
-    let [name, setName] = useState("")
-    let [email, setEmail] = useState("")
-    let [address, setAddress] = useState("")
-    let [gender, setGender] = useState("male")
+    let [name, setName] = useState<string>("")
+    let [email, setEmail] = useState<string>("")
+    let [address, setAddress] = useState<string>("")
+    let [gender, setGender] = useState<Gender>("male")
     let [cv, setCv] = useState<File | null>(null)
-    let [linkedin, setLinkedin] = useState("")
-    let [about, setAbout] = useState("")
+    let [linkedin, setLinkedin] = useState<string>("")
+    let [about, setAbout] = useState<string>("")
 
-    let [loading, setLoading] = useState(false)
+    let [loading, setLoading] = useState<boolean>(false)
 
     let handleSubmit = (e: any) => {
         e.preventDefault()
@@ -141,7 +143,7 @@ export default function Job({ job }: Job) {
                                         <span className="label-text">Gender</span>
                                     </label>
 
-                                    <select className="select select-bordered" name="gender" onChange={(e) => setGender(e.target.value)} value={gender} disabled={loading}>
+                                    <select className="select select-bordered" name="gender" onChange={(e) => setGender(e.target.value as Gender)} value={gender} disabled={loading}>
                                         <option disabled selected>Select Options</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
