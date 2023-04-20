@@ -1,10 +1,24 @@
 import React, { useState } from 'react'
-import { Link, usePage } from '@inertiajs/inertia-react'
+import { usePage } from '@inertiajs/inertia-react'
 import { Inertia } from '@inertiajs/inertia'
 import route from 'ziggy-js'
+import { FiArrowLeft } from 'react-icons/fi'
 import { MainLayout } from '@/Layouts/MainLayout'
+import { sanitizeHtml } from '@/Helpers/Tools'
 
-export default function Job({ job }: any) {
+interface Job {
+    created_at: string;
+    description: string;
+    id: string;
+    info: string;
+    level: string;
+    salary: number;
+    title: string;
+    updated_at: string;
+    job: any;
+}
+
+export default function Job({ job }: Job) {
     let { errors, flash }: any = usePage().props
     let job_id = job.id
 
@@ -64,15 +78,17 @@ export default function Job({ job }: any) {
                 {/* Main */}
                 <div className="card bg-base-100 shadow-xl my-8 p-3">
                     <div className="card-body">
-                        <div className="flex justify-betwen gap-8">
+                        <div className="flex flex-col md:flex-row lg:flex-row justify-between gap-8">
 
-                            <div>
+                            <div className="w-full">
+                                <span className="badge badge-error mb-8 p-4 cursor-pointer" onClick={() => window.history.back() }><FiArrowLeft /></span>
+
                                 <h1 className="mb-8 font-bold text-2xl">{ job.title }</h1>
 
-                                <p>{ job.description }</p>
+                                <p>{ sanitizeHtml(job.description) }</p>
                             </div>
 
-                            <form className="w-96" onSubmit={handleSubmit}>
+                            <form className="lg:w-96 md:w-96" onSubmit={handleSubmit}>
                                 <h1 className="font-bold text-2xl mb-8 text-center">Apply this Job</h1>
 
                                 <div className="form-control mb-4">
