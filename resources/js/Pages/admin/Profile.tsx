@@ -3,6 +3,7 @@ import { usePage } from '@inertiajs/inertia-react'
 import AdminLayout from '@/Layouts/AdminLayout'
 import { Inertia } from '@inertiajs/inertia'
 import route from 'ziggy-js'
+import { FiKey, FiEdit } from 'react-icons/fi'
 
 export default function Profile() {
     let { userAuth, errors, flash }: any = usePage().props
@@ -183,9 +184,9 @@ export default function Profile() {
                         <p className="mb-4">{ userAuth.data.email }</p>
 
                         <div className="card-actions flex justify-center">
-                            <label htmlFor="edit-profile" className={`btn btn-primary ${loading ? "loading" : ""}`}>Edit Profile</label>
+                            <label htmlFor="edit-profile" className={`gap-2 btn btn-primary ${loading ? "loading" : ""}`}><FiEdit />Edit Profile</label>
 
-                            <label htmlFor="edit-password" className="btn btn-success">Change Password</label>
+                            <label htmlFor="edit-password" className="btn btn-success gap-2"><FiKey />Change Password</label>
                         </div>
                     </div>
                 </div>

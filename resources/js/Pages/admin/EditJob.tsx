@@ -142,7 +142,7 @@ export default function EditJob({ job }: Job) {
                     <div className="flex justify-between my-4">
                         <Link href={route("jobs")} className="btn btn-error">Back</Link>
 
-                        <button className={`btn btn-primary ${loading ? "loading" : ""}`} type="submit">Add</button>
+                        <button className={`btn btn-primary ${loading ? "loading" : ""}`} type="submit">Edit</button>
                     </div>
                 </form>
 
