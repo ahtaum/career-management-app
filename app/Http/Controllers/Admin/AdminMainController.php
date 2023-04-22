@@ -13,6 +13,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Models\Job;
 use App\Models\Candidate;
+use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -28,6 +29,12 @@ class AdminMainController extends Controller
 
     public function profile() {
         return Inertia::render("admin/Profile");
+    }
+
+    public function companies() {
+        return Inertia::render("admin/Companies", [
+            "companies" => Company::all()->first()
+        ]);
     }
 
     // Process
