@@ -1,22 +1,25 @@
 import React, { useState } from 'react'
-import { Link, usePage } from '@inertiajs/inertia-react'
+import { usePage } from '@inertiajs/inertia-react'
 import { Inertia } from '@inertiajs/inertia'
 import route from 'ziggy-js'
+import { FiArrowLeft } from 'react-icons/fi'
 import { MainLayout } from '@/Layouts/MainLayout'
+import { sanitizeHtml } from '@/Helpers/Tools'
+import { Gender, Job } from '@/Interfaces/types'
 
-export default function Job({ job }: any) {
+export default function Job({ job }: Job) {
     let { errors, flash }: any = usePage().props
     let job_id = job.id
 
-    let [name, setName] = useState("")
-    let [email, setEmail] = useState("")
-    let [address, setAddress] = useState("")
-    let [gender, setGender] = useState("male")
+    let [name, setName] = useState<string>("")
+    let [email, setEmail] = useState<string>("")
+    let [address, setAddress] = useState<string>("")
+    let [gender, setGender] = useState<Gender>("male")
     let [cv, setCv] = useState<File | null>(null)
-    let [linkedin, setLinkedin] = useState("")
-    let [about, setAbout] = useState("")
+    let [linkedin, setLinkedin] = useState<string>("")
+    let [about, setAbout] = useState<string>("")
 
-    let [loading, setLoading] = useState(false)
+    let [loading, setLoading] = useState<boolean>(false)
 
     let handleSubmit = (e: any) => {
         e.preventDefault()
@@ -64,15 +67,17 @@ export default function Job({ job }: any) {
                 {/* Main */}
                 <div className="card bg-base-100 shadow-xl my-8 p-3">
                     <div className="card-body">
-                        <div className="flex justify-betwen gap-8">
+                        <div className="flex flex-col md:flex-row lg:flex-row justify-between gap-8">
 
-                            <div>
+                            <div className="w-full">
+                                <span className="badge badge-error mb-8 p-4 cursor-pointer" onClick={() => window.history.back() }><FiArrowLeft /></span>
+
                                 <h1 className="mb-8 font-bold text-2xl">{ job.title }</h1>
 
-                                <p>{ job.description }</p>
+                                <p>{ sanitizeHtml(job.description) }</p>
                             </div>
 
-                            <form className="w-96" onSubmit={handleSubmit}>
+                            <form className="lg:w-96 md:w-96" onSubmit={handleSubmit}>
                                 <h1 className="font-bold text-2xl mb-8 text-center">Apply this Job</h1>
 
                                 <div className="form-control mb-4">
@@ -125,7 +130,7 @@ export default function Job({ job }: any) {
                                         <span className="label-text">Gender</span>
                                     </label>
 
-                                    <select className="select select-bordered" name="gender" onChange={(e) => setGender(e.target.value)} value={gender} disabled={loading}>
+                                    <select className="select select-bordered" name="gender" onChange={(e) => setGender(e.target.value as Gender)} value={gender} disabled={loading}>
                                         <option disabled selected>Select Options</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>

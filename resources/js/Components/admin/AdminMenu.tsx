@@ -28,6 +28,7 @@ export const AdminMenu = () => {
                             </ul>
                         </li>
 
+                        <li><Link href={route("companies")}>Companies</Link></li>
                         <li><Link href={route("profile")}>Profile</Link></li>
                         <li><Link href={route("logout")} method="post" as="button" type="button">Logout</Link></li>
                         <li><a href="#">Logout</a></li>

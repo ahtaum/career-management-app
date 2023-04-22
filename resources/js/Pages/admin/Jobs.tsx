@@ -4,8 +4,10 @@ import { Inertia } from '@inertiajs/inertia'
 import route from 'ziggy-js'
 import AdminLayout from '@/Layouts/AdminLayout'
 import { convertDate, sanitizeHtml } from '@/Helpers/Tools'
+import { Props } from '@/Interfaces/props'
+import { FiTrash, FiEdit, FiPlus } from 'react-icons/fi'
 
-export default function Jobs({ jobs }: any) {
+export default function Jobs({ jobs }: Props) {
     let { flash }: any = usePage().props
     let [search, setSearch] = useState("")
 
@@ -82,7 +84,10 @@ export default function Jobs({ jobs }: any) {
                 <h1 className="font-bold text-2xl mb-8">Jobs</h1>
 
                 <div className="flex justify-between mr-2 my-8">
-                    <Link href={route("addJob")} className="btn btn-primary">Add</Link>
+                    <Link href={route("addJob")} className="btn btn-primary gap-2">
+                        <FiPlus className="text-2xl" />
+                        <span className="lg:flex md:flex hidden">Add</span>
+                    </Link>
 
                     <input type="text" placeholder="Type here" className="input input-bordered" onChange={(e) => setSearch(e.target.value)} value={search} />
                 </div>
@@ -112,12 +117,12 @@ export default function Jobs({ jobs }: any) {
                                         <td>{ job.level }</td>
                                         <td>{ convertDate(job.updated_at) }</td>
                                         <td className="flex gap-2">
-                                            <label htmlFor="details-job" className="badge badge-info p-3 cursor-pointer" onClick={() => {
+                                            <label htmlFor="details-job" className="badge badge-info p-3 cursor-pointer hover:text-white" onClick={() => {
                                                 setTitle(job.title)
                                                 setDescription(job.description)
                                             }}>Details</label>
-                                            <Link href={route("editJob", job.id)} className="badge badge-success p-3 cursor-pointer">Edit</Link>
-                                            <label htmlFor="delete-modal" className="badge badge-error p-3 cursor-pointer" onClick={ () => setId(job.id) }>Delete</label>
+                                            <Link href={route("editJob", job.id)} className="badge badge-success p-3 cursor-pointer hover:text-white"><FiEdit /></Link>
+                                            <label htmlFor="delete-modal" className="badge badge-error p-3 cursor-pointer hover:text-white" onClick={ () => setId(job.id) }><FiTrash /></label>
                                         </td>
                                     </tr>
                                 )) }

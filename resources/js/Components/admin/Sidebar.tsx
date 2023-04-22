@@ -49,6 +49,11 @@ let Sidebar = () => {
                     )}
                 </li>
                 <li className="mb-2">
+                    <Link href={route("companies")} className="flex items-center py-2 px-6 text-white hover:bg-blue-500">
+                    Companies
+                    </Link>
+                </li>
+                <li className="mb-2">
                     <Link href={route("profile")} className="flex items-center py-2 px-6 text-white hover:bg-blue-500">
                     Profile
                     </Link>

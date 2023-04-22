@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Link, usePage } from '@inertiajs/inertia-react'
+import { usePage } from '@inertiajs/inertia-react'
 import { Inertia } from '@inertiajs/inertia'
 import route from 'ziggy-js'
 import AdminLayout from '@/Layouts/AdminLayout'
 import { convertDate } from '@/Helpers/Tools'
 import DownloadFiles from '@/Components/admin/DownloadFiles'
+import { FiTrash, FiEdit } from 'react-icons/fi'
 
 export default function Candidates({ candidates }: any) {
     let { flash }: any = usePage().props
@@ -138,6 +139,7 @@ export default function Candidates({ candidates }: any) {
                                 <tr>
                                     <th></th>
                                     <th>Name</th>
+                                    <th>Email</th>
                                     <th>Applied</th>
                                     <th>Cv</th>
                                     <th>Status</th>
@@ -152,6 +154,7 @@ export default function Candidates({ candidates }: any) {
                                     <tr key={index}>
                                         <th>{ index + 1 }</th>
                                         <td>{ candidate.name }</td>
+                                        <td>{ candidate.email }</td>
                                         <td>{ candidate.jobs.title }</td>
                                         <td>
                                             <DownloadFiles filename={ candidate.cv } />
@@ -162,16 +165,16 @@ export default function Candidates({ candidates }: any) {
                                         <td>{ convertDate(candidate.updated_at) }</td>
                                         <td className="flex gap-2">
                                             { candidate.about &&
-                                                <label htmlFor="details-candidate" className="badge badge-info p-3 cursor-pointer" onClick={ () => {
+                                                <label htmlFor="details-candidate" className="badge badge-info p-3 cursor-pointer hover:text-white" onClick={ () => {
                                                     setAbout(candidate.about)
                                                     setLinkedin(candidate.linkedin)
                                                 } }>Details</label>
                                             }
-                                            <label htmlFor="edit-status" className="badge badge-success p-3 cursor-pointer" onClick={ () => {
+                                            <label htmlFor="edit-status" className="badge badge-success p-3 cursor-pointer hover:text-white" onClick={ () => {
                                                 setStatus(candidate.applications.status)
                                                 setId(candidate.applications.id)
-                                            } }>Edit</label>
-                                            <label htmlFor="delete-candidate" className="badge badge-error p-3 cursor-pointer" onClick={() => setId(candidate.id)}>Delete</label>
+                                            } }><FiEdit /></label>
+                                            <label htmlFor="delete-candidate" className="badge badge-error p-3 cursor-pointer hover:text-white" onClick={() => setId(candidate.id)}><FiTrash /></label>
                                         </td>
                                     </tr>
                                 )) }

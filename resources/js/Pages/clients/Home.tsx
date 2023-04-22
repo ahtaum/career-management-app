@@ -3,8 +3,9 @@ import { Link } from '@inertiajs/inertia-react'
 import route from 'ziggy-js'
 import { MainLayout } from '@/Layouts/MainLayout'
 import { convertDate } from '@/Helpers/Tools'
+import { Props } from '@/Interfaces/props'
 
-export default function Home({ companies, jobs }: any) {
+export default function Home({ companies, jobs }: Props) {
     let [search, setSearch] = useState("")
 
     // Search Data

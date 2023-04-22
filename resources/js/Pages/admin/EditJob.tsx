@@ -4,8 +4,9 @@ import route from 'ziggy-js'
 import AdminLayout from '@/Layouts/AdminLayout'
 import TextEditor from '@/Components/tools/TextEditor'
 import { Inertia } from '@inertiajs/inertia'
+import { Job } from '@/Interfaces/types'
 
-export default function EditJob({ job }: any) {
+export default function EditJob({ job }: Job) {
     let { errors, flash }: any = usePage().props
 
     let [id, setId] = useState(job.id)
@@ -141,7 +142,7 @@ export default function EditJob({ job }: any) {
                     <div className="flex justify-between my-4">
                         <Link href={route("jobs")} className="btn btn-error">Back</Link>
 
-                        <button className={`btn btn-primary ${loading ? "loading" : ""}`} type="submit">Add</button>
+                        <button className={`btn btn-primary ${loading ? "loading" : ""}`} type="submit">Edit</button>
                     </div>
                 </form>
 
