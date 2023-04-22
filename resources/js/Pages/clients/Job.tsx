@@ -5,20 +5,7 @@ import route from 'ziggy-js'
 import { FiArrowLeft } from 'react-icons/fi'
 import { MainLayout } from '@/Layouts/MainLayout'
 import { sanitizeHtml } from '@/Helpers/Tools'
-
-interface Job {
-    created_at: string;
-    description: string;
-    id: string;
-    info: string;
-    level: string;
-    salary: number;
-    title: string;
-    updated_at: string;
-    job: any;
-}
-
-type Gender = "male" | "female"
+import { Gender, Job } from '@/Interfaces/types'
 
 export default function Job({ job }: Job) {
     let { errors, flash }: any = usePage().props

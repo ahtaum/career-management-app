@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, usePage } from '@inertiajs/inertia-react'
+import { usePage } from '@inertiajs/inertia-react'
 import { Inertia } from '@inertiajs/inertia'
 import route from 'ziggy-js'
 import AdminLayout from '@/Layouts/AdminLayout'

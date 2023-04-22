@@ -4,8 +4,9 @@ import route from 'ziggy-js'
 import AdminLayout from '@/Layouts/AdminLayout'
 import TextEditor from '@/Components/tools/TextEditor'
 import { Inertia } from '@inertiajs/inertia'
+import { Job } from '@/Interfaces/types'
 
-export default function EditJob({ job }: any) {
+export default function EditJob({ job }: Job) {
     let { errors, flash }: any = usePage().props
 
     let [id, setId] = useState(job.id)

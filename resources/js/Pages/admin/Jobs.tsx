@@ -4,8 +4,9 @@ import { Inertia } from '@inertiajs/inertia'
 import route from 'ziggy-js'
 import AdminLayout from '@/Layouts/AdminLayout'
 import { convertDate, sanitizeHtml } from '@/Helpers/Tools'
+import { Props } from '@/Interfaces/props'
 
-export default function Jobs({ jobs }: any) {
+export default function Jobs({ jobs }: Props) {
     let { flash }: any = usePage().props
     let [search, setSearch] = useState("")
 
