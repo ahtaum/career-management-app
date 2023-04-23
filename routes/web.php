@@ -37,9 +37,11 @@ Route::prefix("admin")->middleware('auth')->group(function() {
         Route::get("/dashboard", "dashboard")->name("dashboard");
         Route::get("/profile", "profile")->name("profile");
         Route::get("/companies", "companies")->name("companies");
+        Route::get("/changeCompanyProfile/{id}", "changeCompanyProfile")->name("changeCompanyProfile");
 
         Route::post("/profile/changeProfile/{id}", "changeProfile")->name("changeProfile");
         Route::post("/profile/changePassword/{id}", "changePassword")->name("changePassword");
+        Route::post("/profile/editCompanyProfile/{id}", "editCompanyProfile")->name("editCompanyProfile");
     });
 
     Route::controller(JobController::class)->group(function() {

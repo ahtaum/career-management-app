@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 
 class Company extends Model
 {
+    public $incrementing = false;
+    protected $keyType = 'string';
     protected $table = 'companies';
     protected $guarded = ['id'];
 
