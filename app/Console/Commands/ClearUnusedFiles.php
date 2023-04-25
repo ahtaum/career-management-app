@@ -8,9 +8,7 @@ use App\Models\Company;
 use App\Models\User;
 use App\Models\Candidate;
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Storage;
 
 class ClearUnusedFiles extends Command
 {
@@ -36,7 +34,6 @@ class ClearUnusedFiles extends Command
     public function handle()
     {
         if(Schema::hasTable('users')) {
-            // Hapus gambar yang tidak terpakai
             $avatarsPath = public_path('storage/avatars');
             $usedAvatars = User::pluck('avatar')->filter()->map(function ($avatar) use ($avatarsPath) {
                 return str_replace(url('/'), '', asset($avatar));
@@ -49,8 +46,6 @@ class ClearUnusedFiles extends Command
 
 
         if (Schema::hasTable('companies')) {
-
-            // Hapus logo yang tidak terpakai
             $logoPath = public_path('storage/logo');
             $usedLogos = Company::pluck('logo')->filter()->map(function ($logo) use ($logoPath) {
                 return str_replace(url('/'), '', asset($logo));
@@ -59,11 +54,9 @@ class ClearUnusedFiles extends Command
             foreach ($unusedLogos as $logo) {
                 unlink($logoPath.'/'.$logo);
             }
-
         }
 
         if (Schema::hasTable('candidates')) {
-            // Hapus file yang tidak terpakai
             $filesPath = storage_path('app/public/files');
             $usedFiles = Candidate::pluck('cv')->filter()->toArray();
             $unusedFiles = array_diff(scandir($filesPath), ['.', '..', '.gitkeep']);
