@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\CompanyRequest;
 use App\Http\Requests\UpdateUserRequest;
 
 use App\Models\User;
@@ -32,8 +33,29 @@ class AdminMainController extends Controller
     }
 
     public function companies() {
+        $data = Company::all()->first();
+        $companies = [];
+
+        $logoUrl = Storage::url($data->logo);
+        array_push($companies, [
+            'address' => $data->address,
+            'created_at' => $data->created_at,
+            'description' => $data->description,
+            'id' => $data->id,
+            'info' => $data->info,
+            'logo' => $logoUrl,
+            'name' => $data->name,
+            'updated_at' => $data->updated_at,
+        ]);
+
         return Inertia::render("admin/Companies", [
-            "companies" => Company::all()->first()
+            "companies" => $companies[0]
+        ]);
+    }
+
+    public function changeCompanyProfile($id) {
+        return Inertia::render("admin/ChangeCompanyProfile", [
+            "company" => Company::findOrFail($id)
         ]);
     }
 
@@ -77,5 +99,31 @@ class AdminMainController extends Controller
         Auth::login($profile);
 
         return redirect()->back()->with('message', 'User Password successfuly Change!');
+    }
+
+    public function editCompanyProfile($id, CompanyRequest $request) {
+        $validated = $request->validated();
+
+        $company = Company::findOrFail($id);
+        $company->name = $validated["name"];
+        $company->address = $validated["address"];
+        $company->info = $validated["info"];
+        $company->description = $validated["description"];
+
+        if ($request->hasFile('logo')) {
+            $logo = $request->file('logo');
+            $filename = $logo->hashName('public/logo');
+            $company->logo = $filename;
+
+            if ($company->getOriginal('logo') !== null) {
+                Storage::delete($company->getOriginal('logo'));
+            }
+
+            $logo->store('public/logo');
+        }
+
+        $company->save();
+
+        return redirect()->back()->with('message', 'Company Profile has successfuly Change!');
     }
 }

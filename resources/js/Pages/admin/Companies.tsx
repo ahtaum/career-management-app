@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from '@inertiajs/inertia-react'
 import AdminLayout from '@/Layouts/AdminLayout'
 import { Inertia } from '@inertiajs/inertia'
 import route from 'ziggy-js'
@@ -19,7 +20,7 @@ export default function Companies({ companies }: any) {
                             <span>{ companies.address }</span>
                         </div>
 
-                        <div className="avatar">
+                        <div className="avatar mx-auto my-4">
                             <div className="w-24 rounded-full">
                                 <img src={ companies.logo } />
                             </div>
@@ -27,7 +28,7 @@ export default function Companies({ companies }: any) {
 
                         <p className="mb-8">{ companies.description }</p>
 
-                        <button className="btn btn-info">Edit</button>
+                        <Link href={route("changeCompanyProfile", companies.id)} className="btn btn-info">Edit</Link>
                     </div>
                 </div>
 
