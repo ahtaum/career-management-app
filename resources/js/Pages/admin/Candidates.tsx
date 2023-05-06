@@ -11,6 +11,8 @@ export default function Candidates({ candidates }: any) {
     let { flash }: any = usePage().props
 
     let [search, setSearch] = useState("")
+    let [currentPage, setCurrentPage] = useState(1)
+    let jobsPerPage = 10
 
     let [about, setAbout] = useState("")
     let [linkedin, setLinkedin] = useState("")
@@ -47,6 +49,21 @@ export default function Candidates({ candidates }: any) {
         } catch (error: any) {
             console.log(error.message)
         }
+    }
+
+    // Pagination
+    let indexOfLastJob = currentPage * 10
+    let indexOfFirstJob = indexOfLastJob - 10
+    let currentJobs = searchPosts().slice(indexOfFirstJob, indexOfLastJob)
+
+    let totalPages = Math.ceil(searchPosts().length / jobsPerPage)
+
+    let handleNextPage = () => {
+        setCurrentPage(currentPage + 1)
+    }
+
+    let handlePrevPage = () => {
+        setCurrentPage(currentPage - 1)
     }
 
     return (
@@ -133,6 +150,8 @@ export default function Candidates({ candidates }: any) {
 
                 { candidates.length === 0 && <p className="mt-10 text-center text-slate-500 italic">Data Empty...</p> }
                 { candidates.length !== 0 &&
+                    <>
+
                     <div className="overflow-x-auto">
                         <table className="table table-compact w-full">
                             <thead>
@@ -150,7 +169,7 @@ export default function Candidates({ candidates }: any) {
                                 </tr>
                             </thead>
                             <tbody>
-                                { candidates && searchPosts().map((candidate: any, index: number) => (
+                                { candidates && currentJobs.map((candidate: any, index: number) => (
                                     <tr key={index}>
                                         <th>{ index + 1 }</th>
                                         <td>{ candidate.name }</td>
@@ -181,6 +200,14 @@ export default function Candidates({ candidates }: any) {
                             </tbody>
                         </table>
                     </div>
+
+                    {/* pagination button */}
+                    <div className="flex justify-center mt-8">
+                        <button onClick={handlePrevPage} disabled={currentPage === 1} className="btn btn-primary mr-2">Previous</button>
+                        <button onClick={handleNextPage} disabled={currentPage === totalPages} className="btn btn-primary">Next</button>
+                    </div>
+
+                    </>
                 }
 
             </section>

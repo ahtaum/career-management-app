@@ -7,6 +7,8 @@ import { Props } from '@/Interfaces/props'
 
 export default function Home({ companies, jobs }: Props) {
     let [search, setSearch] = useState("")
+    let [currentPage, setCurrentPage] = useState(1)
+    let jobsPerPage = 6
 
     // Search Data
     let searchPosts = () => {
@@ -19,6 +21,21 @@ export default function Home({ companies, jobs }: Props) {
                 )
             })
         })
+    }
+
+    // Pagination
+    let indexOfLastJob = currentPage * 6
+    let indexOfFirstJob = indexOfLastJob - 6
+    let currentJobs = searchPosts().slice(indexOfFirstJob, indexOfLastJob)
+
+    let totalPages = Math.ceil(searchPosts().length / jobsPerPage)
+
+    let handleNextPage = () => {
+      setCurrentPage(currentPage + 1)
+    }
+
+    let handlePrevPage = () => {
+      setCurrentPage(currentPage - 1)
     }
 
     return (
@@ -45,7 +62,7 @@ export default function Home({ companies, jobs }: Props) {
 
                     <div className="lg:grid lg:grid-cols-3 lg:gap-8 lg:p-0 p-5 md:grid md:grid-cols-3 md:gap-8 md:p-5 my-8">
 
-                        { jobs && searchPosts().map((job: any) => (
+                        { jobs && currentJobs.map((job: any) => (
                             <div className="card bg-base-100 hover:bg-base-200 shadow-xl mb-4" key={job.id}>
                                 <div className="card-body">
                                     <h2 className="card-title">{ job.title }</h2>
@@ -63,6 +80,12 @@ export default function Home({ companies, jobs }: Props) {
                             </div>
                         )) }
 
+                    </div>
+
+                    {/* pagination button */}
+                    <div className="flex justify-center mt-8">
+                        <button onClick={handlePrevPage} disabled={currentPage === 1} className="btn btn-primary mr-2">Previous</button>
+                        <button onClick={handleNextPage} disabled={currentPage === totalPages} className="btn btn-primary">Next</button>
                     </div>
                 </div>
 

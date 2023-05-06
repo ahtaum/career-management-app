@@ -10,6 +10,8 @@ import { FiTrash, FiEdit, FiPlus } from 'react-icons/fi'
 export default function Jobs({ jobs }: Props) {
     let { flash }: any = usePage().props
     let [search, setSearch] = useState("")
+    let [currentPage, setCurrentPage] = useState(1)
+    let jobsPerPage = 10
 
     let [id, setId] = useState("")
     let [title, setTitle] = useState("")
@@ -35,6 +37,21 @@ export default function Jobs({ jobs }: Props) {
         } catch (error: any) {
             console.log(error.message)
         }
+    }
+
+    // Pagination
+    let indexOfLastJob = currentPage * 10
+    let indexOfFirstJob = indexOfLastJob - 10
+    let currentJobs = searchPosts().slice(indexOfFirstJob, indexOfLastJob)
+
+    let totalPages = Math.ceil(searchPosts().length / jobsPerPage)
+
+    let handleNextPage = () => {
+        setCurrentPage(currentPage + 1)
+    }
+
+    let handlePrevPage = () => {
+        setCurrentPage(currentPage - 1)
     }
 
     return (
@@ -94,6 +111,8 @@ export default function Jobs({ jobs }: Props) {
 
                 { jobs.length === 0 && <p className="mt-10 text-center text-slate-500 italic">Data Empty...</p> }
                 { jobs.length !== 0 &&
+                    <>
+
                     <div className="overflow-x-auto">
                         <table className="table table-compact w-full">
                             <thead>
@@ -108,7 +127,7 @@ export default function Jobs({ jobs }: Props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                { jobs && searchPosts().map((job: any, index: number) => (
+                                { jobs && currentJobs.map((job: any, index: number) => (
                                     <tr key={job.id}>
                                         <th>{ index + 1 }</th>
                                         <td>{ job.title }</td>
@@ -129,6 +148,14 @@ export default function Jobs({ jobs }: Props) {
                             </tbody>
                         </table>
                     </div>
+
+                    {/* pagination button */}
+                    <div className="flex justify-center mt-8">
+                        <button onClick={handlePrevPage} disabled={currentPage === 1} className="btn btn-primary mr-2">Previous</button>
+                        <button onClick={handleNextPage} disabled={currentPage === totalPages} className="btn btn-primary">Next</button>
+                    </div>
+
+                    </>
                 }
 
             </section>
