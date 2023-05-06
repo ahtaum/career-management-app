@@ -44,7 +44,6 @@ class ClearUnusedFiles extends Command
             }
         }
 
-
         if (Schema::hasTable('companies')) {
             $logoPath = public_path('storage/logo');
             $usedLogos = Company::pluck('logo')->filter()->map(function ($logo) use ($logoPath) {
