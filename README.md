@@ -6,7 +6,8 @@ Career Management Application is a tool for customizing careers in companies, wh
 - First is **Important** copy or rename file **.env.example** to **.env** and configuration your database
 - type in console or terminal `composer install`
 - type in console or terminal `npm i` or `npm install`
-- type `php artisan  migrate --seed` or `php artisan migrage:fresh --seed` type `--seed` is required because it comes with default data.
+- type `php artisan migrate --seed` or `php artisan migrage:fresh --seed` type `--seed` is required because it comes with default data.
+- type in console or terminal `php artisan storage:link` for storage link
 - and type in console or terminal  `php artisan key:generate`  for security.
 -   run this command at same time in your console or terminal  `npm run dev`  and  `php artisan serve`  .
     -   `npm run dev`  for running all asset in frontend with  **Vite**.
