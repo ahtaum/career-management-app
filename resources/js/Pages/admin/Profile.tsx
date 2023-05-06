@@ -169,8 +169,6 @@ export default function Profile() {
             {/* Main */}
             <section id="profile-page" className="container my-8 p-3">
 
-                <h1 className="font-bold text-2xl mb-4">Profile</h1>
-
                 <div className="card bg-base-100 shadow-xl">
                     <div className="card-body text-center">
                         <h2 className="mb-8 font-bold text-2xl">{ userAuth.data.username }</h2>

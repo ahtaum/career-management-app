@@ -98,8 +98,6 @@ export default function Jobs({ jobs }: Props) {
             {/* Main */}
             <section id="jobs-page" className="container my-8 p-3">
 
-                <h1 className="font-bold text-2xl mb-8">Jobs</h1>
-
                 <div className="flex justify-between mr-2 my-8">
                     <Link href={route("addJob")} className="btn btn-primary gap-2">
                         <FiPlus className="text-2xl" />

@@ -50,8 +50,6 @@ export default function EditJob({ job }: Job) {
 
             <section id="editPostJob-page" className="container my-8 p-3">
 
-                <h1 className="font-bold text-2xl mb-8 lg:text-left md:text-left text-center">Edit Job</h1>
-
                 { flash.message && (
                     <div className="alert alert-success shadow-lg my-4">
                         <div>

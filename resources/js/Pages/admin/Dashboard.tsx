@@ -16,8 +16,6 @@ export default function Dashboard({ total_jobs, total_candidates }: DashboardPro
 
             <section id="dashboard-admin-page" className="container my-8 p-3">
 
-                <h1 className="font-bold text-2xl">Dashboard</h1>
-
                 <div className="lg:flex md:flex justify-between gap-4 my-8">
                     <div className="card bg-base-100 w-full shadow-xl mb-4">
                         <div className="card-body mx-auto">

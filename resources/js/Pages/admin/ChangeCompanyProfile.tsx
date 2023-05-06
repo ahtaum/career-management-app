@@ -42,8 +42,6 @@ export default function ChangeCompanyProfile({ company }: any) {
 
             <section id="change-company-profile" className="container my-8 p-3">
 
-                <h1 className="font-bold text-2xl mb-8 lg:text-left md:text-left text-center">Change Company Profile</h1>
-
                 { flash.message && (
                     <div className="alert alert-success shadow-lg my-4">
                         <div>

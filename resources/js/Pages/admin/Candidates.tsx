@@ -144,8 +144,6 @@ export default function Candidates({ candidates }: any) {
 
             <section id="candidates-page" className="container my-8 p-3">
 
-                <h1 className="font-bold text-2xl mb-8">Candidates</h1>
-
                 <input type="text" placeholder="Search Candidates" className="input input-bordered my-5" onChange={(e) => setSearch(e.target.value)} value={search} />
 
                 { candidates.length === 0 && <p className="mt-10 text-center text-slate-500 italic">Data Empty...</p> }
