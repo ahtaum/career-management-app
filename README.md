@@ -3,9 +3,9 @@ Career Management Application is a tool for customizing careers in companies, wh
 
 ## Install
 - Clone this repository by typing it in the console or terminal
+- First is **Important** copy or rename file **.env.example** to **.env** and configuration your database
 - type in console or terminal `composer install`
 - type in console or terminal `npm i` or `npm install`
-- copy or rename file **.env.example** to **.env** and configuration your database
 - type `php artisan  migrate --seed` or `php artisan migrage:fresh --seed` type `--seed` is required because it comes with default data.
 - and type in console or terminal  `php artisan key:generate`  for security.
 -   run this command at same time in your console or terminal  `npm run dev`  and  `php artisan serve`  .
