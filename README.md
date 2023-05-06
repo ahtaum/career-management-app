@@ -13,6 +13,7 @@ Career Management Application is a tool for customizing careers in companies, wh
     -   `npm run dev`  for running all asset in frontend with  **Vite**.
     -   `php artisan serve`  run local server.
   -   go in your local url in your browser to open web type  **[http://127.0.0.1:8000](http://127.0.0.1:8000/)**
+- if you want clear all assets(image and files) use this costum command `php artisan clear:unused-files` to clear all assets
 
 ## Stack
 
