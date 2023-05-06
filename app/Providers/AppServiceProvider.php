@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
         if($this->app->runningInConsole()) {
             $this->app->booted(function () {
+                Artisan::call("create:default-assets");
                 Artisan::call("clear:unused-files");
             });
         }
